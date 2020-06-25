@@ -8,4 +8,18 @@
 - Change the PATH variable to also point to the MASM and linker folders, or edit [%pathToMASMFolder% in run.bat](run.bat) to point to the correct folder.
 
 # Run
-Run
+Run `run.bat` and select an example file.
+
+# x86-64 Registers in Windows 10
+|  Register |  Hardware         | Software: x64 Calling Convention |
+|:----------|:------------------|:---------------------------------|
+|   RAX     |Default accumulator|Return value, volatile            |
+|   RBX     |Index              |Nonvolatile                       |
+|   RCX     |Loop counter       |1st integer argument, volatile    |
+|   RDX     |                   |2nd integer argument, volatile    |
+|   RSI     |Source index       |Nonvolatile                       |
+|   RDI     |Destination index  |Nonvolatile                       |
+|   RBP     |Base pointer       |Nonvolatile                       |
+|   RSP     |Stack pointer      |Nonvolatile                       |
+|   R10, R11|                   |Volatile                          |
+|   R12-R15 |                   |Nonvolatile                       |
