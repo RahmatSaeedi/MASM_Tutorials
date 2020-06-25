@@ -13,7 +13,7 @@ main            proc                        ; Marks the beging of procedure 'mai
                 mov     rcx, 2d             ; Stores decimal 2 in register RCX
                 mul     rcx                 ; Multiplies RAX by RCX and stores the result in registers RDX:RAX, with RAX containing low, and RDX contanng the high bits
                 sub     rax, 0Ah            ; Subtracts hexadecimal 0xA = decimal 10 from RAX
-                mov     rcx, rax            ; Stores the result in RCX
+                mov     rcx, rax            ; Stores the result as 
 
                 call    ExitProcess         ; Jumps to function 'ExitProcess'
 main            endp                        ; Marks the end of procedure 'main'
