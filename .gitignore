@@ -1,2 +1,4 @@
-ml64.exe
-kernel32.Lib
+kernel32.lib
+*\main.obj
+*\main.exe
+*\mllink$.lnk
