@@ -14,12 +14,19 @@ Run `run.bat` and select an example file.
 |  Register |  Hardware         | Software: x64 Calling Convention |
 |:----------|:------------------|:---------------------------------|
 |   RAX     |Default accumulator|Return value, volatile            |
-|   RBX     |Index              |Nonvolatile                       |
-|   RCX     |Loop counter       |1st integer argument, volatile    |
+|   _RBX_   |Index              |Nonvolatile                       |
+|   RCX     |Loop counter       |1st integer argument, volatile, usually exit status code|
 |   RDX     |                   |2nd integer argument, volatile    |
-|   RSI     |Source index       |Nonvolatile                       |
-|   RDI     |Destination index  |Nonvolatile                       |
-|   RBP     |Base pointer       |Nonvolatile                       |
-|   RSP     |Stack pointer      |Nonvolatile                       |
+|   _RSI_   |Source index       |Nonvolatile                       |
+|   _RDI_   |Destination index  |Nonvolatile                       |
+|   _RBP_   |Base pointer       |Nonvolatile                       |
+|   _RSP_   |Stack pointer      |Nonvolatile                       |
+|   R8, R9  |                   |3rd/4th integer argument, volatile|
 |   R10, R11|                   |Volatile                          |
-|   R12-R15 |                   |Nonvolatile                       |
+|  _R12-R15_|                   |Nonvolatile                       |
+# Application Binary Interface
+## Shadow spaces in x64
+Called procedure assumes:
+- stack contains room for storing four 64-bit registers, 
+- RSP stack pointer is aligned on a 128-bit address boundary,
+And since, CALL instruction pushes its return address (8 bytes) onto the stack, so a shadow space of 40 bytes is typically reserved on the stack before procedure calls
