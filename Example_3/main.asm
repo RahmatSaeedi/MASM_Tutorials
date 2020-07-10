@@ -12,43 +12,44 @@ Console             equ     -11             ; Precompiller directive: assigns a 
 
 
 
-.code                                       ; Begins code section
-main        proc                            ; Start of procedure name Main
-            sub         rbp, 40             ; reserve 40 bytes of Shadow space
+.code                                                   ; Begins code section
+main        proc                                        ; Start of procedure name Main
+            sub         rbp, 40                         ; reserve 40 bytes of Shadow space
 
 
 
             ; Get the handel for console display monitor I/O streams
-            mov         rcx, Console        ; Sets RCX to -11
-            call        GetStdHandle        ; Returns handle in register RAX
-            mov         stdout, rax
+            mov         rcx, Console                    ; Sets RCX to -11
+            call        GetStdHandle                    ; Returns handle in register RAX
+            mov         stdout, rax                     ; Store the handel in memory location named 'stdout'
 
             
-            ; Set background and forground colour
-            mov         rcx, stdout
-            mov         rdx, 1fh
-            call        SetConsoleTextAttribute 
+            ; Set background and forground color
+            mov         rcx, stdout                     ; Pass the handel stored ate memory location named 'stdout' as first argument
+            mov         rdx, 1fh                        ; Pass the desired color code, Background = 0x1 = Blue, forground =0xf=Bright white
+            call        SetConsoleTextAttribute         
 
 
             ; Displays 'Hello World'
-            mov         rcx, stdout
-            lea         rdx, msg
-            mov         r8, lengthof msg
-            lea         r9, nBytesWritten
+            mov         rcx, stdout                     ; Pass the handel as first argument
+            lea         rdx, msg                        ; Message location as the second argument
+            mov         r8, lengthof msg                ; Length of message as the third argument
+            lea         r9, nBytesWritten               ; return value storage location as the forth argument
             call        WriteConsoleA
             
             
             
-            ; Resets background and forground colour
-            mov         rcx, stdout
-            mov         rdx, 07h
+            ; Resets background and forground color
+            mov         rcx, stdout                     ; Pass handel as the first argument
+            mov         rdx, 07h                        ; Pass the color as the second argument
             call        SetConsoleTextAttribute 
 
 
-            add         rbp, 40             ; release the 40 bytes of Shadow space
-            mov         rcx, nBytesWritten  ; set the exit code to number of bytes written
-            call        ExitProcess         ; Jump to ExitProcess function
-main        endp                            ; End of procedure name Main
+            add         rbp, 40                         ; release the 40 bytes of Shadow space
+            mov         rax, nBytesWritten              ; set the return code to number of bytes written
+            mov         rcx, 0                          ; set the exit code 0
+            call        ExitProcess                     ; Jump to ExitProcess function
+main        endp                                        ; End of procedure name Main
 
 
 .data                                                   ; Begining of Data Section
